@@ -48,7 +48,7 @@ function ScatteredPhoto({ event, index, onSelect, frEvent, lang }) {
           </h3>
           <p className="text-gray-300 text-xs mt-1">{event.date}</p>
           <span className="mt-2 text-brand text-xs font-semibold">
-            {lang === "ar" ? "عرض الصور ←" : "Voir les photos →"}
+            {lang === "ar" ? "عرض الصور ←" : lang === "en" ? "View photos →" : "Voir les photos →"}
           </span>
         </div>
       </div>
@@ -231,7 +231,7 @@ function GalleryModal({ event, frEvent, isOpen, onClose, lang, isDark }) {
 
                 <div className="mb-5">
                   <p className="text-[10px] font-bold text-brand uppercase tracking-wider mb-2">
-                    {lang === "ar" ? "الوصف" : "Description"}
+                    {lang === "ar" ? "الوصف" : "Description"}{/* same in FR/EN */}
                   </p>
                   <p
                     className={`text-sm leading-relaxed ${isDark ? "text-gray-300" : "text-gray-700"}`}
@@ -242,7 +242,7 @@ function GalleryModal({ event, frEvent, isOpen, onClose, lang, isDark }) {
 
                 <div className="mb-5">
                   <p className="text-[10px] font-bold text-brand uppercase tracking-wider mb-2">
-                    {lang === "ar" ? "الدور" : "Mon rôle"}
+                    {lang === "ar" ? "الدور" : lang === "en" ? "My role" : "Mon rôle"}
                   </p>
                   <p
                     className={`text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
@@ -253,7 +253,7 @@ function GalleryModal({ event, frEvent, isOpen, onClose, lang, isDark }) {
 
                 <div className="mb-5">
                   <p className="text-[10px] font-bold text-brand uppercase tracking-wider mb-2">
-                    {lang === "ar" ? "النقاط البارزة" : "Points clés"}
+                    {lang === "ar" ? "النقاط البارزة" : lang === "en" ? "Key points" : "Points clés"}
                   </p>
                   <ul className="space-y-2">
                     {event.highlights.map((h, i) => (
@@ -273,7 +273,7 @@ function GalleryModal({ event, frEvent, isOpen, onClose, lang, isDark }) {
                 {frEvent?.guests?.length > 0 && (
                   <div>
                     <p className="text-[10px] font-bold text-brand uppercase tracking-wider mb-2">
-                      {lang === "ar" ? "الضيوف المدعوون" : "Invités"}
+                      {lang === "ar" ? "الضيوف المدعوون" : lang === "en" ? "Guests" : "Invités"}
                     </p>
                     <ul className="space-y-2">
                       {frEvent.guests.map((guest, i) => (
@@ -381,6 +381,8 @@ export default function Club() {
               >
                 {lang === "ar"
                   ? "← انقر على الصور للتفاصيل"
+                  : lang === "en"
+                  ? "Click on the photos for details →"
                   : "Cliquez sur les photos pour voir les détails →"}
               </p>
             </motion.div>

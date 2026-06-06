@@ -125,6 +125,8 @@ export default function Navbar() {
           >
             <span className={lang === 'fr' ? 'text-brand' : 'text-gray-400'}>FR</span>
             <span className="text-gray-400 font-light">|</span>
+            <span className={lang === 'en' ? 'text-brand' : 'text-gray-400'}>EN</span>
+            <span className="text-gray-400 font-light">|</span>
             <span className={lang === 'ar' ? 'text-brand' : 'text-gray-400'}>ع</span>
           </button>
 

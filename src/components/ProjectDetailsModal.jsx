@@ -230,7 +230,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose, lang }) 
                         }`}
                       >
                         <DownloadIcon />
-                        {project.details?.downloadLabel || (lang === 'ar' ? 'تحميل الرسالة' : 'Télécharger Rapport')}
+                        {project.details?.downloadLabel || (lang === 'ar' ? 'تحميل الرسالة' : lang === 'en' ? 'Download Report' : 'Télécharger Rapport')}
                       </a>
                     )}
                   </div>

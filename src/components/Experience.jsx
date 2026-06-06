@@ -2,6 +2,51 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '../context/LanguageContext'
 
 const timeline = {
+  en: [
+    {
+      date: 'June 2020',
+      title: 'Baccalaureate',
+      subtitle: 'Taza, Morocco',
+      description: 'Obtained the baccalaureate — first step toward a career in computer engineering.',
+      tag: 'Education',
+    },
+    {
+      date: 'Sept. 2020',
+      title: 'Joined ENSA',
+      subtitle: 'National School of Applied Sciences',
+      description: 'Admitted to ENSA — beginning of a 5-year engineering program in applied sciences.',
+      tag: 'Education',
+    },
+    {
+      date: 'Sept. 2022',
+      title: 'Computer Engineering',
+      subtitle: 'ENSA — Specialization',
+      description: 'Joined the Computer Engineering track — software development, systems and networks.',
+      tag: 'Education',
+    },
+    {
+      date: 'Jul. 2024',
+      title: 'PFA Internship',
+      subtitle: 'Full Stack Developer',
+      description: 'Design and development of a full-stack web application — React + Spring Boot + MySQL.',
+      tag: 'Internship',
+    },
+    {
+      date: 'Feb. 2025',
+      title: 'PFE Internship',
+      subtitle: 'Mobile Developer',
+      description: 'Development of a mobile banking application — React Native + Spring Boot + MySQL.',
+      tag: 'Internship',
+    },
+    {
+      date: 'Mar. 2026',
+      title: 'Software Engineer',
+      subtitle: 'Currently employed',
+      description: 'Beginning career as a Full Stack Software Engineer — Java, Spring Boot, React, Docker & Kubernetes.',
+      tag: 'Work',
+      current: true,
+    },
+  ],
   fr: [
     {
       date: 'Juin 2020',
@@ -95,21 +140,24 @@ const timeline = {
 }
 
 const tagStyle = {
-  'Études':    'bg-[#1e3a5f] text-blue-300',
-  'Stage':     'bg-[#3a2a10] text-orange-300',
-  'Travail':   'bg-[#0f2e1f] text-emerald-300',
-  'دراسة':    'bg-[#1e3a5f] text-blue-300',
-  'تدريب':    'bg-[#3a2a10] text-orange-300',
-  'عمل':      'bg-[#0f2e1f] text-emerald-300',
+  'Études':     'bg-[#1e3a5f] text-blue-300',
+  'Stage':      'bg-[#3a2a10] text-orange-300',
+  'Travail':    'bg-[#0f2e1f] text-emerald-300',
+  'Education':  'bg-[#1e3a5f] text-blue-300',
+  'Internship': 'bg-[#3a2a10] text-orange-300',
+  'Work':       'bg-[#0f2e1f] text-emerald-300',
+  'دراسة':     'bg-[#1e3a5f] text-blue-300',
+  'تدريب':     'bg-[#3a2a10] text-orange-300',
+  'عمل':       'bg-[#0f2e1f] text-emerald-300',
 }
 
 export default function Experience() {
   const { lang } = useLanguage()
   const isRtl   = lang === 'ar'
   const items   = timeline[lang]
-  const title   = lang === 'ar' ? 'مساري المهني' : 'Mon Parcours'
-  const badge   = lang === 'ar' ? 'التجربة'       : 'Expérience'
-  const nowTxt  = lang === 'ar' ? 'الآن'          : 'Maintenant'
+  const title   = lang === 'ar' ? 'مساري المهني' : lang === 'en' ? 'My Journey'   : 'Mon Parcours'
+  const badge   = lang === 'ar' ? 'التجربة'       : lang === 'en' ? 'Experience'   : 'Expérience'
+  const nowTxt  = lang === 'ar' ? 'الآن'          : lang === 'en' ? 'Now'          : 'Maintenant'
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden">
@@ -280,7 +328,7 @@ function BubbleCard({ item, side, isCurrent, lang, mobile, index }) {
           {isCurrent && (
             <span className="flex items-center gap-1 text-[10px] font-bold text-brand">
               <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse inline-block" />
-              {lang === 'ar' ? 'حالياً' : 'Maintenant'}
+              {lang === 'ar' ? 'حالياً' : lang === 'en' ? 'Current' : 'Maintenant'}
             </span>
           )}
           {/* Mobile date */}
