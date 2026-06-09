@@ -10,6 +10,7 @@ import Projects from './components/Projects'
 import Club from './components/Club'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ChatBot from './components/ChatBot'
 
 function AppContent() {
   const { lang } = useLanguage()
@@ -35,6 +36,7 @@ function AppContent() {
         <Contact />
       </main>
       <Footer />
+      <ChatBot />
     </div>
   )
 }
