@@ -25,13 +25,29 @@ export default function Navbar() {
   const { lang, toggleLang } = useLanguage()
   const { isDark, toggleTheme } = useTheme()
   const t = translations[lang].nav
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [visitors, setVisitors]     = useState(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const counted = sessionStorage.getItem('visited')
+    const endpoint = counted
+      ? 'https://api.countapi.xyz/get/ayoub-elyaakoubi-portfolio/visits'
+      : 'https://api.countapi.xyz/hit/ayoub-elyaakoubi-portfolio/visits'
+
+    fetch(endpoint)
+      .then(r => r.json())
+      .then(d => {
+        if (!counted) sessionStorage.setItem('visited', '1')
+        setVisitors(d.value)
+      })
+      .catch(() => {})
   }, [])
 
   const links = [
@@ -79,6 +95,34 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2.5">
+          {/* ── Visitor counter ── */}
+          {visitors !== null && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className={`hidden sm:flex items-center gap-1.5 border px-3 py-1.5 rounded-full text-xs font-semibold ${
+                isDark
+                  ? 'bg-[#151433] border-[#252548] text-gray-300'
+                  : 'bg-white border-[#d8d8ee] text-gray-600 shadow-sm'
+              }`}
+              title="Visiteurs uniques"
+            >
+              <svg className="w-3.5 h-3.5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+              <motion.span
+                key={visitors}
+                initial={{ y: -8, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {visitors.toLocaleString()}
+              </motion.span>
+            </motion.div>
+          )}
+
           {/* ── Theme toggle ── */}
           <motion.button
             onClick={toggleTheme}
