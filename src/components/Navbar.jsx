@@ -37,15 +37,13 @@ export default function Navbar() {
 
   useEffect(() => {
     const counted = sessionStorage.getItem('visited')
-    const endpoint = counted
-      ? 'https://api.countapi.xyz/get/ayoub-elyaakoubi-portfolio/visits'
-      : 'https://api.countapi.xyz/hit/ayoub-elyaakoubi-portfolio/visits'
+    const endpoint = counted ? '/api/visits' : '/api/visits?hit=1'
 
     fetch(endpoint)
       .then(r => r.json())
       .then(d => {
         if (!counted) sessionStorage.setItem('visited', '1')
-        setVisitors(d.value)
+        setVisitors(d.count)
       })
       .catch(() => {})
   }, [])
